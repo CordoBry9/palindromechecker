@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>APP NAME: A coding challenge</title>
+    <title>Palindrome Check: A coding challenge</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -23,18 +23,19 @@
     <link rel="stylesheet" href="/css/prism.css">
 
     <!-- custom css -->
-    <link rel="shortcut icon" href="/img/light-logo - favicon.svg" type="image/x-icon">
+    <link rel="shortcut icon" href="/img/Palindrome Check - Copy.svg" type="image/x-icon">
     <link rel="stylesheet" href="/css/themes.css">
     <link rel="stylesheet" href="/css/site.css">
 
 
 </head>
 
-<body data-bac-theme="purple">
+<body data-bac-theme="green">
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark">
             <div class="container-xxl">
-                <a class="navbar-brand" href="/index.html"> <img src="img/APPNAMELogo.svg" height="30">App Name</a>
+                <a class="navbar-brand" href="/index.html"> <img src="img/Palindrome Check.svg" height="30">Palindrome
+                    Check</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
                     aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -65,26 +66,89 @@
             <div class="col-12 col-lg-8">
                 <pre class="line-numbers">
                     <code class="language-js">
-                        function displayMessage() {
-                        
-                            let inputBox = document.getElementById('message');
-                            let message = inputBox.value;
-                        
-                            Swal.fire({
-                                title: "App Name", //change to actual app name
-                                text: message,
-                                icon: "success",
-                                backdrop: false,
-                              });
-                            }
+                        //entry point function
+function getValues() {
+    let inputString = document.getElementById('inputString').value;
+    let newString = inputString.replace(/\s/g, '').toLowerCase();
+
+    if (newString.length < 2) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops!',
+            text: 'Please enter a string with 2 or more characters.',
+            backdrop: false,
+        });
+    } 
+    else {
+        
+        let reversedString = reverseString(newString);
+        let isPalindrome = checkForPalindrome(newString, reversedString);
+        displayResult(reversedString, isPalindrome);
+    }
+}
+
+// Function to reverse a string
+function reverseString(newString) {
+    let result = '';
+
+    for (let i = newString.length - 1; i >= 0; i--) {
+
+        result += newString[i];
+
+    }
+    return result;
+}
+
+// function with an if else that determines if original string is a palindrome by equating it with the first
+function checkForPalindrome(originalString, reversedString) {
+
+    if (originalString == reversedString) {
+
+        return true; 
+    } 
+
+    else 
+    {
+        return false; 
+    }
+}
+
+// function displays the result
+function displayResult(reversedString, isPalindrome) {
+
+    let alert = document.getElementById('alert');
+    let message = document.getElementById('msg');
+
+    alert.classList.remove('invisible','alert-success','alert-danger');
+    message.innerHTML = reversedString;
+
+    if (isPalindrome == true) {
+        Swal.fire({
+            icon: 'success',
+            title: 'Nice!',
+            text: 'This is a palindrome.',
+            backdrop: false,
+        });
+
+        alert.classList.add('alert-success');
+    } 
+    else {
+
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops!',
+            text: 'Not a palindrome.',
+            backdrop: false,
+        });
+
+        alert.classList.add('alert-danger');
+    }
+}
+
                     </code>
                 </pre>
             </div>
             <div class="col-12 col-lg-4">
-                <p>The code is structured in one function.</p>
-                <h5><code>displayMessage()</code></h5>
-                <p>
-                    The<code> displayMessage </code>function gets the text from the input element and displays it in a Sweet Alert popup.
                 </p>
             </div>
         </div>
@@ -98,7 +162,7 @@
                     &copy; 2024 Bryan Cordova
                 </div>
                 <div class="col text-center">
-                    <img src="/img/APPNAMELogo.svg" height="30">
+                    <img src="/img/Palindrome Check.svg" height="30">
                 </div>
                 <div class="col text-center text-lg-end">
                     <a href="https://github.com/CordoBry9" class="text-decoration-none" target="_blank">
