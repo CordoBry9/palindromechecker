@@ -1,7 +1,7 @@
 //entry point function
 function getValues() {
     let inputString = document.getElementById('inputString').value;
-    let newString = inputString.replace(/\s/g, '').toLowerCase();
+    let newString = inputString.replace(/[^\w\d]/gi, '').toLowerCase();
 
     if (newString.length < 2) {
         Swal.fire({
@@ -10,9 +10,9 @@ function getValues() {
             text: 'Please enter a string with 2 or more characters.',
             backdrop: false,
         });
-    } 
+    }
     else {
-        
+
         let reversedString = reverseString(newString);
         let isPalindrome = checkForPalindrome(newString, reversedString);
         displayResult(reversedString, isPalindrome);
@@ -36,22 +36,21 @@ function checkForPalindrome(originalString, reversedString) {
 
     if (originalString == reversedString) {
 
-        return true; 
-    } 
+        return true;
+    }
 
-    else 
-    {
-        return false; 
+    else {
+        return false;
     }
 }
 
 // function displays the result
 function displayResult(reversedString, isPalindrome) {
 
-    let alert = document.getElementById('alert');
     let message = document.getElementById('msg');
+    let alert = document.getElementById('alert');
 
-    alert.classList.remove('invisible','alert-success','alert-danger');
+    alert.classList.remove('invisible', 'alert-success', 'alert-danger');
     message.innerHTML = reversedString;
 
     if (isPalindrome == true) {
@@ -63,7 +62,7 @@ function displayResult(reversedString, isPalindrome) {
         });
 
         alert.classList.add('alert-success');
-    } 
+    }
     else {
 
         Swal.fire({
